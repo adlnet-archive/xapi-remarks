@@ -17,7 +17,7 @@ The parser will allow you to convert xAPI Remarks to xAPI Statements. This is he
 <Agent> <Verb> <Object> {context}
 ```
 
-The first three parameter's are required by Statements and thus required by Remarks. Any following object will require the same matching brace style as its parent, e.g. `( (2, 0, 3) (PT1M) )` which represents scores (raw, min, max) and duration. 
+The first three parameter's are required by Statements and thus required by Remarks. Any following object will require the same matching brace style as its parent, e.g. `( (2, 0, 3) ("PT1M") )` which represents scores (raw, min, max) and duration. 
 
 ### Examples
 
