@@ -8,7 +8,7 @@ var remarks = [
   '<Agent> <Verb> <Object> (result) [attachments]',
   '<Agent> <Verb> <Object> [attachments]',
   '<Agent> <Verb> <Object> {context}',
-  '<tyler@example.com> <passed> <assessment1> ( (2, 0, 3) (2 minutes) ) { {chapter 1} {page 5, science 101, science} }',
+  '<tyler@example.com> <passed> <assessment1> ( (2, 0, 3) ("PT2M") ) { {chapter 1} {page 5, science 101, science} }',
   '<tyler@example.com> <passed> <assessment1> ( (2, 0, 3) ("PT2M") )',
   '<tyler@example.com> <passed> < dsaasghasdfasdfas',
   '<tyler@example.com> <3@)$@ _@#_!!dsaasghasdfasdfas'
