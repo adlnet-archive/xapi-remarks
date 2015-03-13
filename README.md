@@ -17,12 +17,14 @@ The parser will allow you to convert xAPI Remarks to xAPI Statements. This is he
 <Agent> <Verb> <Object> {context}
 ```
 
-The first three parameter's are required by Statements and thus required by Remarks. Any following object will require the same matching brace style as its parent, e.g. `( (2, 0, 3) (1 minute) )` which represents scores (raw, min, max) and duration. 
+The first three parameter's are required by Statements and thus required by Remarks. Any following object will require the same matching brace style as its parent, e.g. `( (2, 0, 3) (PT1M) )` which represents scores (raw, min, max) and duration. 
 
 ### Examples
 
 ```
-<tyler> <passed> <assessment 1> ( (2, 0, 3) (2 minutes) ) { {chapter 1} {page 5, science 101, science} }
+<tyler@example.com> <passed> <assessment1> ( (2, 0, 3) ("PT2M") ) { {chapter 1} {page 5, science 101, science} }
 ```
+
+The duration is represented by [ISO 8601 Durations](http://www.wikiwand.com/en/ISO_8601#/Durations), just like Statements.
 
 This project is still a work in progress, as such, syntax may (will) change.
