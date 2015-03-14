@@ -14,6 +14,11 @@ var remarks = [
   '<tyler@example.com> <3@)$@ _@#_!!dsaasghasdfasdfas'
 ];
 
+// global variables
+var baseuri = "http://example.com/";
+// ADL verbs
+var verbs = ['answered','asked','attempted','attended','commented','completed','exited','experienced','failed','imported','initialized','interacted','launched','mastered','passed','preferred','progressed','registered','responded','resumed','scored','shared','suspended','terminated','voided'];
+
 /* Covert a Remark String into an array
  * TODO:
  * - match reserved verbs
@@ -63,6 +68,19 @@ function remarkArrayToStatement(array) {
   var actor = avo[0].slice(1).slice(0,-1);
   var verb = avo[1].slice(1).slice(0,-1);
   var object = avo[2].slice(1).slice(0,-1);
+  
+  var re = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+  // Check if full URI or in ADL verb list
+  console.log(verb.match(re));
+  if (verbs.indexOf(verb) != -1) {
+    verburi = 'http://adlnet.gov/expapi/verbs/' + verb;
+  } else if (verb.match(re) == null) {
+    verburi = baseuri + 'verbs/' + verb;
+  } else {
+    verburi = verb;
+    verb = verburi.split(/\//).pop();
+  }
+  
   var stmt = {
     'actor': {
       'mbox': 'mailto:' + actor,
@@ -72,11 +90,11 @@ function remarkArrayToStatement(array) {
       'display': {
         'en-US': verb
       },
-      'id': 'http://adlnet.gov/expapi/verbs/' + verb
+      'id': verburi
     },
     'object': {
-      'id': 'http://example.com/' + object,
-      'objectType': 'Object'
+      'id': baseuri + 'activities/' + object,
+      'objectType': 'Activity'
     }
   };
   // If more than an Actor, Verb and Object exist
