@@ -8,7 +8,8 @@ var remarks = [
   '<Agent> <Verb> <Object> (result) [attachments]',
   '<Agent> <Verb> <Object> [attachments]',
   '<Agent> <Verb> <Object> {context}',
-  '<tyler@example.com> <passed> <assessment1> ( (2, 0, 3) ("PT2M") ) { {chapter 1} {page 5, science 101, science} }',
+  '<tyler@example.com> <passed> <assessment1> ( (2, 0, 3) ("PT2M") ) { {"chapter 1"} {"page 5", "science 101", "science"} }',
+  '<tyler@example.com> <passed> <assessment1> ( (2, 0, 3) ("PT2M") ) { {"chapter 1"} {"page 5", "http://coolsite.com/acitivites/science_101", "science"} }',
   '<tyler@example.com> <passed> <assessment1> ( (2, 0, 3) ("PT2M") )',
   '<tyler@example.com> <passed> < dsaasghasdfasdfas',
   '<tyler@example.com> <3@)$@ _@#_!!dsaasghasdfasdfas'
@@ -18,6 +19,8 @@ var remarks = [
 var baseuri = "http://example.com/";
 // ADL verbs
 var verbs = ['answered','asked','attempted','attended','commented','completed','exited','experienced','failed','imported','initialized','interacted','launched','mastered','passed','preferred','progressed','registered','responded','resumed','scored','shared','suspended','terminated','voided'];
+// uri regex pattern
+var re_uri = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
 
 /* Covert a Remark String into an array
  * TODO:
@@ -68,13 +71,11 @@ function remarkArrayToStatement(array) {
   var actor = avo[0].slice(1).slice(0,-1);
   var verb = avo[1].slice(1).slice(0,-1);
   var object = avo[2].slice(1).slice(0,-1);
-  
-  var re = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+
   // Check if full URI or in ADL verb list
-  console.log(verb.match(re));
   if (verbs.indexOf(verb) != -1) {
     verburi = 'http://adlnet.gov/expapi/verbs/' + verb;
-  } else if (verb.match(re) == null) {
+  } else if (verb.match(re_uri) == null) {
     verburi = baseuri + 'verbs/' + verb;
   } else {
     verburi = verb;
@@ -122,6 +123,59 @@ function remarkArrayToStatement(array) {
         break;
         // context
         case "{":
+          arr = JSON.parse(o.replace(/\{/g,"[").replace(/\}/g,"]").replace(/\] \[/,"],[").trim());
+          var parent = arr[0][0];
+          var grouping = arr[1];
+
+          if (parent.match(re_uri) == null) {
+            parenturi = baseuri + 'acitivities/' + encodeURI(parent);
+          } else {
+            parenturi = parent;
+            parent = parenturi.split(/\//).pop();
+          }
+
+          if (grouping) {
+            var grouping_arr = [];
+            grouping.forEach(function(g) {
+              
+              if (g.match(re_uri) == null) {
+                guri = baseuri + 'acitivities/' + encodeURI(g);
+              } else {
+                guri = g;
+                g = guri.split(/\//).pop();
+              }
+
+              grouping_arr.push({
+               "definition": {
+                    "name": {
+                        "en-US": g
+                    }
+                },
+                'id': guri,
+                'objectType': 'Acitivity'
+              });
+            });
+          }
+          stmt_ex = {
+            'context': {
+              'contextActivities': {
+                'parent': [
+                  {
+                    "definition": {
+                        "name": {
+                            "en-US": parent
+                        }
+                    },
+                    'id': parenturi,
+                    'objectType': 'Acitivity'
+                  }
+                ]
+              }
+            }
+          }
+          if (grouping_arr) {
+            stmt_ex.context.contextActivities['grouping'] = grouping_arr;
+          }
         break;
         // attachments
         case "[":
@@ -130,7 +184,6 @@ function remarkArrayToStatement(array) {
       }
       stmt = mergeJSON(stmt, stmt_ex);
     });
-    return stmt;
   }
   return stmt;
 }
