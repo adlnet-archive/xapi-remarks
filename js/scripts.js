@@ -81,7 +81,12 @@ function remarkArrayToStatement(array) {
     verburi = verb;
     verb = verburi.split(/\//).pop();
   }
-  
+
+  // Check if full URI or needs to be made into one
+  if (object.match(re_uri) == null) {
+    objecturi = baseuri + 'activities/' + encodeURI(object);
+  }
+
   var stmt = {
     'actor': {
       'mbox': 'mailto:' + actor,
@@ -94,7 +99,7 @@ function remarkArrayToStatement(array) {
       'id': verburi
     },
     'object': {
-      'id': baseuri + 'activities/' + object,
+      'id': objecturi,
       'objectType': 'Activity'
     }
   };
@@ -128,7 +133,7 @@ function remarkArrayToStatement(array) {
           var grouping = arr[1];
 
           if (parent.match(re_uri) == null) {
-            parenturi = baseuri + 'acitivities/' + encodeURI(parent);
+            parenturi = baseuri + 'activities/' + encodeURI(parent);
           } else {
             parenturi = parent;
             parent = parenturi.split(/\//).pop();
@@ -139,7 +144,7 @@ function remarkArrayToStatement(array) {
             grouping.forEach(function(g) {
               
               if (g.match(re_uri) == null) {
-                guri = baseuri + 'acitivities/' + encodeURI(g);
+                guri = baseuri + 'activities/' + encodeURI(g);
               } else {
                 guri = g;
                 g = guri.split(/\//).pop();
@@ -152,7 +157,7 @@ function remarkArrayToStatement(array) {
                     }
                 },
                 'id': guri,
-                'objectType': 'Acitivity'
+                'objectType': 'Activity'
               });
             });
           }
@@ -167,7 +172,7 @@ function remarkArrayToStatement(array) {
                         }
                     },
                     'id': parenturi,
-                    'objectType': 'Acitivity'
+                    'objectType': 'Activity'
                   }
                 ]
               }
