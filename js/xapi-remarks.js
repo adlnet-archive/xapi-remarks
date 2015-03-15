@@ -71,6 +71,8 @@
       // Check if full URI or needs to be made into one
       if (object.match(re_uri) == null) {
         objecturi = baseuri + 'activities/' + encodeURI(object);
+      } else {
+        objecturi = object;
       }
 
       var stmt = {

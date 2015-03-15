@@ -5,15 +5,67 @@
   <meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0">
   <meta name="description" content="A shorthand syntax for communicating xAPI Statements">
   <meta name="author" content="ADL">
+  <link rel="icon" href="favicon.ico">
 
   <title>xAPI Remarks</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/styles.css" />
 
 </head>
 
 <body>
 
-  <p>Open your developer tools (f12) and refresh this page.</p>
-  
+  <section class="container">
+
+    <div class="page-header">
+      <h1 class="text-primary"><i class="fa fa-quote-right"></i> xAPI Remarks</h1>
+      <h3 class="text-muted">A shorthand syntax for communicating xAPI Statements</h3>
+    </div>
+
+    <div class="row">
+
+      <div class="form-group col-md-12">
+        <label class="control-label" for="example-remarks">Example Remarks</label>
+<textarea class="form-control" rows="5" aria-describedby="Example Remarks" id="example-remarks">
+<tyler@example.com> <progressed> <http://adlnet.github.io>
+<tyler@example.com> <passed> <assessment1> ( (2, 0, 3) ("PT2M") ) { {"chapter 1"} {"page 5", "science 101", "science"} }
+<tyler@example.com> <passed> <assessment1> ( (2, 0, 3) ("PT2M") ) { {"chapter 1"} {"page 5", "http://coolsite.com/acitivites/science_101", "science"} }
+</textarea>
+        <span class="help-block">Copy &amp; Paste one of these into the Remark box below</span>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="form-group col-md-12">
+        <label class="control-label" for="remark">Remark</label>
+        <input type="text" class="form-control" value="" placeholder="<Agent> <Verb> <Object>" aria-describedby="Remark" id="remark">
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-12">
+        <a class="btn btn-primary" href="#" role="button" id="generate-statement">Generate xAPI Statement <i class="glyphicon glyphicon-fire"></i></a>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="form-group col-md-12">
+        <label class="control-label" for="statement">Statement</label>
+        <textarea class="form-control" rows="25" aria-describedby="Statement" id="statement"></textarea>
+      </div>
+
+    </div>
+
+    <p>Open your developer tools (f12) and refresh this page for more examples.</p>
+    
+  </section>
+
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="js/xapi-remarks.js"></script>
   <script type="text/javascript" src="js/scripts.js"></script>
   

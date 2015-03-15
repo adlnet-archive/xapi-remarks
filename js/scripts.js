@@ -24,3 +24,14 @@ remarks.forEach(function(remark) {
 var array = ADL.Remarks.remarkToArray(remarks[9]);
 var stmt = ADL.Remarks.remarkArrayToStatement(array);
 console.log(stmt);
+
+
+$(function() {
+  $("#generate-statement").click(function(e) {
+    var remark = $("#remark").val();
+    var array = ADL.Remarks.remarkToArray(remark);
+    var stmt = ADL.Remarks.remarkArrayToStatement(array);
+    $("#statement").val(JSON.stringify(stmt, undefined, 4));
+    e.preventDefault();
+  });
+});
