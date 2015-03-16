@@ -68,7 +68,7 @@ Extensions are outside the score of this tool
 <tyler@example.com> <passed> <assessment1> ( s: [2, 0, 3], d: "PT2M" ) { p: ["page 5"], g: ["chapter 1", "science 101", "science"] }
 <tyler@example.com> <read> <assessment1> ( s: [2, 0, 3], d: "PT2M" ) { p: ["page 5"], g: ["chapter 1", "science 101", "science"] }
 <tyler@example.com> <http://coolsite.com/verbs/read> <assessment1> ( s: [2, 0, 3], d: "PT2M") ) { p: ["page 5"], g: ["chapter 1", "science 101", "science"] }
-<tyler@example.com> <passed> <assessment1> ( s: [2, 0, 3], d: "PT2M"[ ) { p: ["page 5"], g: ["chapter 1", "http://coolsite.com/acitivites/science_101", "science"] }
+<tyler@example.com> <passed> <assessment1> ( s: [2, 0, 3], d: "PT2M" ) { p: ["page 5"], g: ["chapter 1", "http://coolsite.com/acitivites/science_101", "science"] }
 ```
 
 This project is still a work in progress, as such, syntax may (will) change.
