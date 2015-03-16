@@ -32,4 +32,4 @@ The duration is represented by [ISO 8601 Durations](http://www.wikiwand.com/en/I
 
 This project is still a work in progress, as such, syntax may (will) change.
 
-[View demo front-end](http://adlnet.github.io)
+[View demo front-end](http://adlnet.github.io/xapi-remarks)
