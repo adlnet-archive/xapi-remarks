@@ -31,3 +31,5 @@ The first three parameter's are required by Statements and thus required by Rema
 The duration is represented by [ISO 8601 Durations](http://www.wikiwand.com/en/ISO_8601#/Durations), just like Statements.
 
 This project is still a work in progress, as such, syntax may (will) change.
+
+[View demo front-end](http://adlnet.github.io)
