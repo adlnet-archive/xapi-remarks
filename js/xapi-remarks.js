@@ -116,7 +116,7 @@
                   break;
                   case 'w': // success / win (s taken for score)
                     var w = obj[key];
-                    stmt_ex.result.sucess = w;
+                    stmt_ex.result.success = w;
                   break;
                   case 'c':
                     var c = obj[key];
