@@ -8,11 +8,10 @@ var remarks = [
   '<Agent> <Verb> <Object> (result) [attachments]',
   '<Agent> <Verb> <Object> [attachments]',
   '<Agent> <Verb> <Object> {context}',
-  '<tyler@example.com> <passed> <assessment1> ( (2, 0, 3) ("PT2M") ) { {"page 5"} {"chapter 1", "science 101", "science"} }',
-  '<tyler@example.com> <passed> <assessment1> ( (2, 0, 3) ("PT2M") ) { {"page 5"} {"chapter 1", "http://coolsite.com/acitivites/science_101", "science"} }',
-  '<tyler@example.com> <passed> <assessment1> ( (2, 0, 3) ("PT2M") )',
-  '<tyler@example.com> <passed> < dsaasghasdfasdfas',
-  '<tyler@example.com> <3@)$@ _@#_!!dsaasghasdfasdfas'
+  '<tyler@example.com> <passed> <assessment1> ( s: [2, 0, 3], d: "PT2M" )',
+  '<tyler@example.com> <passed> <assessment1> ( s: [2, 0, 3], d: "PT2M", r: "hello", c: true, w: false ) { p: ["page 5"], g: ["chapter 1", "science 101", "science"] }',
+  //'<tyler@example.com> <passed> < dsaasghasdfasdfas',
+  //'<tyler@example.com> <3@)$@ _@#_!!dsaasghasdfasdfas'
 ];
 
 

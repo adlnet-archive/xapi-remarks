@@ -28,8 +28,8 @@
         <label class="control-label" for="example-remarks">Example Remarks</label>
 <textarea class="form-control" rows="5" aria-describedby="Example Remarks" id="example-remarks">
 <tyler@example.com> <progressed> <http://adlnet.github.io>
-<tyler@example.com> <passed> <assessment1> ( (2, 0, 3) ("PT2M") ) { {"page 5"} {"chapter 1", "science 101", "science"} }
-<tyler@example.com> <passed> <assessment1> ( (2, 0, 3) ("PT2M") ) { {"page 5"} {"chapter 1", "http://coolsite.com/acitivites/science_101", "science"} }
+<tyler@example.com> <passed> <assessment1> ( s: [2, 0, 3], d: "PT2M" ) { p: ["page 5"], g: ["chapter 1", "science 101", "science"] }
+<tyler@example.com> <passed> <assessment1> ( s: [2, 0, 3], d: "PT2M", r: "hello", c: true, w: false ) { p: ["page 5"], g: ["chapter 1", "science 101", "science"] }
 </textarea>
         <span class="help-block">Copy &amp; Paste one of these into the Remark box below</span>
       </div>
@@ -40,7 +40,7 @@
 
       <div class="form-group col-md-12">
         <label class="control-label" for="remark">Remark</label>
-        <input type="text" class="form-control" value="" placeholder="<Agent> <Verb> <Object>" aria-describedby="Remark" id="remark">
+        <input type="text" class="form-control" value="" placeholder="<Agent> <Verb> <Object> (Result) {Context}" aria-describedby="Remark" id="remark">
       </div>
 
     </div>

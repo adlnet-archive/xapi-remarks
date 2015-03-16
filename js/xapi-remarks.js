@@ -101,75 +101,97 @@
           switch (type) {
             // result
             case "(":
-              // turn it into an array of arrays
-              arr = JSON.parse(o.replace(/\(/g,"[").replace(/\)/g,"]").replace(/\] \[/,"],[").trim());
-              var scores = arr[0];
-              var duration = arr[1];
-              stmt_ex = {
-                'result': {
-                  'score': {
-                    'raw': scores[0],
-                    'min': scores[1],
-                    'max': scores[2]
-                  },
-                  'duration': duration[0]
+              // turn it into JSON
+              obj = JSON.parse(o.replace(/\(/g,"{").replace(/\)/g,"}").replace(/([sdrwc]{1}): (\[|"|true|false)/g,'"$1": $2').trim());
+              stmt_ex = { 'result': {} };
+              for(var key in obj) {
+                switch (key) {
+                  case 's':
+                    var s = obj[key];
+                    stmt_ex.result.score = {
+                      'raw': s[0],
+                      'min': s[1],
+                      'max': s[2]
+                    };
+                  break;
+                  case 'w': // success / win (s taken for score)
+                    var w = obj[key];
+                    stmt_ex.result.sucess = w;
+                  break;
+                  case 'c':
+                    var c = obj[key];
+                    stmt_ex.result.completion = c;
+                  break;
+                  case 'r':
+                    var r = obj[key];
+                    stmt_ex.result.response = r;
+                  break;
+                  case 'd':
+                    var d = obj[key];
+                    stmt_ex.result.duration = d;
+                  break;
+                  default:
                 }
-              };
+              }
+
+
             break;
             // context
             case "{":
-              arr = JSON.parse(o.replace(/\{/g,"[").replace(/\}/g,"]").replace(/\] \[/,"],[").trim());
-              var parent = arr[0][0];
-              var grouping = arr[1];
+              obj = JSON.parse(o.replace(/\(/g,"{").replace(/\)/g,"}").replace(/([pg]{1}): (\[|")/g,'"$1": $2').trim());
+              stmt_ex = { 'context': { 'contextActivities' : {} } };
+              for(var key in obj) {
+                switch (key) {
+                  case 'p':
+                    var ps = obj[key];
+                    var parent_arr = [];
+                    ps.forEach(function(p) {
+                      
+                      if (p.match(re_uri) == null) {
+                        puri = baseuri + 'activities/' + encodeURI(p);
+                      } else {
+                        puri = p;
+                        p = puri.split(/\//).pop();
+                      }
 
-              if (parent.match(re_uri) == null) {
-                parenturi = baseuri + 'activities/' + encodeURI(parent);
-              } else {
-                parenturi = parent;
-                parent = parenturi.split(/\//).pop();
-              }
-
-              if (grouping) {
-                var grouping_arr = [];
-                grouping.forEach(function(g) {
-                  
-                  if (g.match(re_uri) == null) {
-                    guri = baseuri + 'activities/' + encodeURI(g);
-                  } else {
-                    guri = g;
-                    g = guri.split(/\//).pop();
-                  }
-
-                  grouping_arr.push({
-                   "definition": {
-                        "name": {
-                            "en-US": g
-                        }
-                    },
-                    'id': guri,
-                    'objectType': 'Activity'
-                  });
-                });
-              }
-              stmt_ex = {
-                'context': {
-                  'contextActivities': {
-                    'parent': [
-                      {
-                        "definition": {
+                      parent_arr.push({
+                       "definition": {
                             "name": {
-                                "en-US": parent
+                                "en-US": p
                             }
                         },
-                        'id': parenturi,
+                        'id': puri,
                         'objectType': 'Activity'
+                      });
+                    });
+                    stmt_ex.context.contextActivities['parent'] = parent_arr;
+                  break;
+                  case 'g':
+                    var gs = obj[key];
+                    var grouping_arr = [];
+                    gs.forEach(function(g) {
+                      
+                      if (g.match(re_uri) == null) {
+                        guri = baseuri + 'activities/' + encodeURI(g);
+                      } else {
+                        guri = g;
+                        g = puri.split(/\//).pop();
                       }
-                    ]
-                  }
+
+                      grouping_arr.push({
+                       "definition": {
+                            "name": {
+                                "en-US": g
+                            }
+                        },
+                        'id': guri,
+                        'objectType': 'Activity'
+                      });
+                    });
+                    stmt_ex.context.contextActivities['grouping'] = grouping_arr;
+                  break;
+                  default:
                 }
-              }
-              if (grouping_arr) {
-                stmt_ex.context.contextActivities['grouping'] = grouping_arr;
               }
             break;
             // attachments
