@@ -16,9 +16,10 @@
     return result;
   }
 
-  Remarks = function() {
+  XAPIRemarks = function() {
     
-    /* Convert a Remark String into an array
+    /* 
+     * Convert a Remark String into an array
      * @param {string} remark formated string
      * @return {array} javascript array with xAPI Statement properties
      */
@@ -42,7 +43,8 @@
       }
     };
 
-    /* Convert an array with xAPI Statement properties
+    /*
+     * Convert an array with xAPI Statement properties
      * @param {array} array of xAPI Statement properties
      * @return {object} an xAPI Statement Object
      */
@@ -183,6 +185,6 @@
 
   };
  
-  ADL.Remarks = new Remarks;
+  ADL.XAPIRemarks = new XAPIRemarks;
   
 }(window.ADL = window.ADL || {}));

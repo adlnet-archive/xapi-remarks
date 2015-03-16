@@ -22,10 +22,10 @@ The first three parameter's are required by Statements and thus required by Rema
 ### Examples
 
 ```
-<tyler@example.com> <passed> <assessment1> ( (2, 0, 3) ("PT2M") ) { {"chapter 1"} {"page 5", "science 101", "science"} }
-<tyler@example.com> <read> <assessment1> ( (2, 0, 3) ("PT2M") ) { {"chapter 1"} {"page 5", "science 101", "science"} }
-<tyler@example.com> <http://coolsite.com/verbs/read> <assessment1> ( (2, 0, 3) ("PT2M") ) { {"chapter 1"} {"page 5", "science 101", "science"} }
-<tyler@example.com> <passed> <assessment1> ( (2, 0, 3) ("PT2M") ) { {"chapter 1"} {"page 5", "http://coolsite.com/acitivites/science_101", "science"} }
+<tyler@example.com> <passed> <assessment1> ( (2, 0, 3) ("PT2M") ) { {"page 5"} {"chapter 1", "science 101", "science"} }
+<tyler@example.com> <read> <assessment1> ( (2, 0, 3) ("PT2M") ) { {"page 5"} {"chapter 1", "science 101", "science"} }
+<tyler@example.com> <http://coolsite.com/verbs/read> <assessment1> ( (2, 0, 3) ("PT2M") ) { {"page 5"} {"chapter 1", "science 101", "science"} }
+<tyler@example.com> <passed> <assessment1> ( (2, 0, 3) ("PT2M") ) { {"page 5"} {"chapter 1", "http://coolsite.com/acitivites/science_101", "science"} }
 ```
 
 The duration is represented by [ISO 8601 Durations](http://www.wikiwand.com/en/ISO_8601#/Durations), just like Statements.
