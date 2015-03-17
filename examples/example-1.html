@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0">
+  <meta name="description" content="A shorthand syntax for communicating xAPI Statements">
+  <meta name="author" content="ADL">
+  <link rel="icon" href="favicon.ico">
+
+  <title>xAPI Remarks - Convert in bulk &amp; send to an LRS</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../media/css/styles.css" />
+
+</head>
+
+<body>
+
+  <section class="container">
+
+    <div class="page-header">
+      <h1 class="text-primary"><i class="fa fa-quote-right"></i> xAPI Remarks</h1>
+      <h3 class="text-muted">A shorthand syntax for communicating xAPI Statements</h3>
+    </div>
+
+    <h3>Taking an interaction flow and converting Remarks in bulk</h3>
+
+    <pre><code>
+  &lt;tyler@example.com&gt; &lt;launched&gt; &lt;cool book&gt;
+  &lt;tyler@example.com&gt; &lt;read&gt; &lt;page 1&gt; ( d: "PT45S" ) { p: ["chapter 1"], g: ["cool book", "cool class"] }
+  &lt;tyler@example.com&gt; &lt;read&gt; &lt;page 2&gt; ( d: "PT15S" ) { p: ["chapter 1"], g: ["cool book", "cool class"] }
+  &lt;tyler@example.com&gt; &lt;read&gt; &lt;page 3&gt; ( d: "PT55S" ) { p: ["chapter 1"], g: ["cool book", "cool class"] }
+  &lt;tyler@example.com&gt; &lt;read&gt; &lt;page 4&gt; ( d: "PT45S" ) { p: ["chapter 1"], g: ["cool book", "cool class"] }
+  &lt;tyler@example.com&gt; &lt;watched&gt; &lt;video 1&gt; ( d: "PT3M" ) { p: ["page 4"], g: ["chapter 1", "cool book", "cool class"] }
+  &lt;tyler@example.com&gt; &lt;paused&gt; &lt;video 1&gt; { p: ["page 4"], g: ["chapter 1", "cool book", "cool class"] }
+  &lt;tyler@example.com&gt; &lt;resumed&gt; &lt;video 1&gt; { p: ["page 4"], g: ["chapter 1", "cool book", "cool class"] }
+  &lt;tyler@example.com&gt; &lt;watch&gt; &lt;video 1&gt; ( d: "PT2M" ) { p: ["page 4"], g: ["chapter 1", "cool book", "cool class"] }
+  &lt;tyler@example.com&gt; &lt;completed&gt; &lt;video 1&gt; ( d: "PT5M" ) { p: ["page 4"], g: ["chapter 1", "cool book", "cool class"] }
+  &lt;tyler@example.com&gt; &lt;read&gt; &lt;page 5&gt; ( d: "PT45S" ) { p: ["chapter 1"], g: ["cool book", "cool class"] }
+  &lt;tyler@example.com&gt; &lt;answered&gt; &lt;question 1&gt; ( r: "answer 2" ) { p: ["page 5"], g: ["chapter 1", "cool book", "cool class"] }
+  &lt;tyler@example.com&gt; &lt;answered&gt; &lt;question 1&gt; ( r: "answer 3" ) { p: ["page 5"], g: ["chapter 1", "cool book", "cool class"] }
+  &lt;tyler@example.com&gt; &lt;answered&gt; &lt;question 1&gt; ( r: "answer 2" ) { p: ["page 5"], g: ["chapter 1", "cool book", "cool class"] }
+  &lt;tyler@example.com&gt; &lt;answered&gt; &lt;question 2&gt; ( r: "answer 4" ) { p: ["page 5"], g: ["chapter 1", "cool book", "cool class"] }
+  &lt;tyler@example.com&gt; &lt;answered&gt; &lt;question 3&gt; ( r: "answer 1" ) { p: ["page 5"], g: ["chapter 1", "cool book", "cool class"] }
+  &lt;tyler@example.com&gt; &lt;completed&gt; &lt;assessment 1&gt; ( s: [2, 0, 3], d: "PT2M" ) { p: ["page 5"], g: ["chapter 1", "cool book", "cool class"] }
+  &lt;tyler@example.com&gt; &lt;passed&gt; &lt;assessment 1&gt; ( s: [2, 0, 3], d: "PT2M" ) { p: ["page 5"], g: ["chapter 1", "cool book", "cool class"] }
+  &lt;tyler@example.com&gt; &lt;suspended&gt; &lt;cool book&gt; { g: ["page 5", "cool class"] }
+  &lt;tyler@example.com&gt; &lt;resumed&gt; &lt;cool book&gt; { g: ["page 5", "cool class"] }
+  &lt;tyler@example.com&gt; &lt;read&gt; &lt;page 6&gt; ( d: "PT45S" ) { p: ["chapter 2"], g: ["cool book", "cool class"] }
+  &lt;tyler@example.com&gt; &lt;read&gt; &lt;page 7&gt; ( d: "PT25S" ) { p: ["chapter 2"], g: ["cool book", "cool class"] }
+  &lt;tyler@example.com&gt; &lt;read&gt; &lt;page 8&gt; ( d: "PT1M15S" ) { p: ["chapter 2"], g: ["cool book", "cool class"] }
+    </code></pre>
+
+    <p>Open your developer tools (f12) and refresh this page to see how many Remarks are converted in one shot.</p>
+
+    <p>View <a href="../media/js/examples/example-1.js">example-1.js</a> to see how this is done.</p>
+    
+    <p><a href="../index.html">Go Back</a> to the main tool example.</p>
+    
+  </section>
+
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../dist/xapi-remarks.js"></script>
+  <script type="text/javascript" src="../lib/xapiwrapper.min.js"></script>
+  <script type="text/javascript" src="../media/js/examples/example-1.js"></script>
+  
+</body>
+</html>

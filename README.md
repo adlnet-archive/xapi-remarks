@@ -59,7 +59,7 @@ Currently unsupported
 
 #### Extensions
 
-Extensions are outside the score of this tool
+Extensions are outside the scope of this tool
 
 
 ### Examples
