@@ -7,7 +7,7 @@ var remarks = [
   '<tyler@example.com> <watched> <video 1> ( d: "PT3M" ) { p: ["page 4"], g: ["chapter 1", "cool book", "cool class"] }',
   '<tyler@example.com> <paused> <video 1> { p: ["page 4"], g: ["chapter 1", "cool book", "cool class"] }',
   '<tyler@example.com> <resumed> <video 1> { p: ["page 4"], g: ["chapter 1", "cool book", "cool class"] }',
-  '<tyler@example.com> <watch> <video 1> ( d: "PT2M" ) { p: ["page 4"], g: ["chapter 1", "cool book", "cool class"] }',
+  '<tyler@example.com> <watched> <video 1> ( d: "PT2M" ) { p: ["page 4"], g: ["chapter 1", "cool book", "cool class"] }',
   '<tyler@example.com> <completed> <video 1> ( d: "PT5M" ) { p: ["page 4"], g: ["chapter 1", "cool book", "cool class"] }',
   '<tyler@example.com> <read> <page 5> ( d: "PT45S" ) { p: ["chapter 1"], g: ["cool book", "cool class"] }',
   '<tyler@example.com> <answered> <question 1> ( r: "answer 2" ) { p: ["page 5"], g: ["chapter 1", "cool book", "cool class"] }',
