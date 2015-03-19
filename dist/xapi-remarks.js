@@ -6,6 +6,7 @@
   var verbs = ['answered','asked','attempted','attended','commented','completed','exited','experienced','failed','imported','initialized','interacted','launched','mastered','passed','preferred','progressed','registered','responded','resumed','scored','shared','suspended','terminated','voided'];
   // uri regex pattern
   var re_uri = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+  var re_email = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 
   // Merge two JSON object
@@ -62,21 +63,15 @@
 
       // Check if full URI or in ADL verb list
       if (verbs.indexOf(verb) != -1) {
-        verburi = 'http://adlnet.gov/expapi/verbs/' + verb;
+        var verburi = 'http://adlnet.gov/expapi/verbs/' + verb;
       } else if (verb.match(re_uri) == null) {
-        verburi = baseuri + 'verbs/' + verb;
+        var verburi = baseuri + 'verbs/' + verb;
       } else {
-        verburi = verb;
-        verb = verburi.split(/\//).pop();
+        var verburi = verb;
+        var verb = verburi.split(/\//).pop();
       }
 
-      // Check if full URI or needs to be made into one
-      if (object.match(re_uri) == null) {
-        objecturi = baseuri + 'activities/' + encodeURI(object);
-      } else {
-        objecturi = object;
-      }
-
+      // Begin statement structure
       var stmt = {
         'actor': {
           'mbox': 'mailto:' + actor,
@@ -88,11 +83,27 @@
           },
           'id': verburi
         },
-        'object': {
-          'id': objecturi,
-          'objectType': 'Activity'
-        }
+        'object': { }
       };
+
+      // Check if email, full URI or needs to be made into a URI and add to stmt object
+      if (object.match(re_email)) {
+        stmt.object = {
+          'mbox': 'mailto:' + object,
+          'objectType': "Agent"
+        };
+      } else if (object.match(re_uri)) {
+        stmt.object = {
+          'id': object,
+          'objectType': "Activity"
+        };
+      } else {
+        stmt.object = {
+          'id': baseuri + 'activities/' + encodeURI(object),
+          'objectType': "Activity"
+        };
+      }
+
       // If more than an Actor, Verb and Object exist
       if (ex) {
         var stmt_ex = {};

@@ -31,9 +31,9 @@ Currently only supports mbox
 
 #### Object
 
-Currently only supports Activities
+Currently only supports Activities and Agents
 
-*string* a word or URI of an Activity
+*string* a word or URI of an Activity (Activity) or an email address (Agent)
 
 #### Result
 

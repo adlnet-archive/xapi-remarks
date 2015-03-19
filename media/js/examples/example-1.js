@@ -21,7 +21,17 @@ var remarks = [
   '<tyler@example.com> <resumed> <cool book> { g: ["page 5", "cool class"] }',
   '<tyler@example.com> <read> <page 6> ( d: "PT45S" ) { p: ["chapter 2"], g: ["cool book", "cool class"] }',
   '<tyler@example.com> <read> <page 7> ( d: "PT25S" ) { p: ["chapter 2"], g: ["cool book", "cool class"] }',
-  '<tyler@example.com> <read> <page 8> ( d: "PT1M15S" ) { p: ["chapter 2"], g: ["cool book", "cool class"] }'
+  '<tyler@example.com> <read> <page 8> ( d: "PT1M15S" ) { p: ["chapter 2"], g: ["cool book", "cool class"] }',
+  '<tyler@example.com> <exited> <cool book> { g: ["page 8"] }',
+  '<tyler@example.com> <launched> <cool book>',
+  '<tyler@example.com> <bookmarked> <page 9> { p: ["chapter 2"], g: ["cool book", "cool class"] }',
+  '<tyler@example.com> <highlighted> <paragraph 6> ( r: "need help" ) { p: ["page 9"], g: ["chapter 2", "cool book", "cool class"] }',
+  '<tyler@example.com> <asked> <page 9> ( r: "Can you please clarify how this applies to science?" ) { p: ["feedback 1"], g: ["chapter 2", "cool book", "cool class"] }',
+  '<tyler@example.com> <read> <page 9> ( d: "PT3M25S" ) { p: ["chapter 2"], g: ["cool book", "cool class"] }',
+  '<tyler@example.com> <highlighted> <paragraph 7> ( r: "insightful" ) { p: ["page 9"], g: ["chapter 2", "cool book", "cool class"] }',
+  '<tyler@example.com> <read> <page 10> ( d: "PT1M04S" ) { p: ["chapter 2"], g: ["cool book", "cool class"] }',
+  '<teacher@example.com> <responded> <tyler@example.com> ( r: "Science is an art of understanding." ) { p: ["feedback 1"], g: ["page 9", "chapter 2", "cool book", "cool class"] }',
+  '<tyler@example.com> <commented> <teacher> ( r: "Okay thanks!" ) { p: ["feedback 1"], g: ["page 9", "chapter 2", "cool book", "cool class"] }'
 ];
 
 var s = [];
@@ -34,8 +44,8 @@ remarks.forEach(function(remark) {
 
 console.log(s);
 
-/* Uncomment the follow to send to an LRS
-var conf = {
+//Uncomment the follow to send to an LRS
+/*var conf = {
   "endpoint" : "https://lrs.adlnet.gov/xapi/",
   "auth" : "Basic " + toBase64('tom:1234'),
 };
