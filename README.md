@@ -7,21 +7,21 @@ The parser will allow you to convert xAPI Remarks to xAPI Statements. This is he
 
 ### Valid Syntax
 ```
-<Agent> <Verb> <Object> (result) {context} [attachments]
-<Agent> <Verb> <Object> (result) {context}
-<Agent> <Verb> <Object> (result)
-<Agent> <Verb> <Object>
-<Agent> <Verb> <Object> {context} [attachments]
-<Agent> <Verb> <Object> (result) [attachments]
-<Agent> <Verb> <Object> [attachments]
-<Agent> <Verb> <Object> {context}
+<Actor> <Verb> <Object> (result) {context} [attachments]
+<Actor> <Verb> <Object> (result) {context}
+<Actor> <Verb> <Object> (result)
+<Actor> <Verb> <Object>
+<Actor> <Verb> <Object> {context} [attachments]
+<Actor> <Verb> <Object> (result) [attachments]
+<Actor> <Verb> <Object> [attachments]
+<Actor> <Verb> <Object> {context}
 ```
 
 The first three parameter's are required by Statements and thus required by Remarks. Any following object will have keys to represent their respective Statement JSON keys. Below is a short list of what values are currently supported for each part of a Remark.
 
-#### Agent
+#### Actor
 
-Currently only supports mbox
+Currently only supports Agent property: mbox
 
 *string* an email address
 
@@ -31,9 +31,9 @@ Currently only supports mbox
 
 #### Object
 
-Currently only supports Activities and Agents
+Currently only supports objectType Activity, Agent and StatementRef
 
-*string* a word or URI of an Activity (Activity) or an email address (Agent)
+*string* a URI of an Activity (Activity), an email address (Agent) or a UUID of a Statement (StatementRef)
 
 #### Result
 

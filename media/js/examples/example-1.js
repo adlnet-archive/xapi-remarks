@@ -45,10 +45,10 @@ remarks.forEach(function(remark) {
 console.log(s);
 
 //Uncomment the follow to send to an LRS
-/*var conf = {
+var conf = {
   "endpoint" : "https://lrs.adlnet.gov/xapi/",
   "auth" : "Basic " + toBase64('tom:1234'),
 };
 ADL.XAPIWrapper.changeConfig(conf);
 ADL.XAPIWrapper.sendStatements(s);
-*/
+

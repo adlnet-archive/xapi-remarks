@@ -7,6 +7,7 @@
   // uri regex pattern
   var re_uri = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
   var re_email = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  var re_uuid = /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/;
 
 
   // Merge two JSON object
@@ -51,6 +52,10 @@
      */
     this.remarkArrayToStatement = function(array) {
       //console.log(array);
+      if (!Array.isArray(array)) {
+        console.log("remarkArrayToStatement did not receive an array");
+        return false;
+      }
       if (array.length > 3) {
         var avo = array.slice(0,3);
         var ex  = array.slice(3);
@@ -91,6 +96,11 @@
         stmt.object = {
           'mbox': 'mailto:' + object,
           'objectType': "Agent"
+        };
+      } else if (object.match(re_uuid)) {
+        stmt.object = {
+          'id': object,
+          'objectType': "StatementRef"
         };
       } else if (object.match(re_uri)) {
         stmt.object = {
