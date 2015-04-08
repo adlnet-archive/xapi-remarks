@@ -8,6 +8,7 @@
   var re_uri = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
   var re_email = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   var re_uuid = /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/;
+  var re_sha1 = /^[a-f0-9]{40}$/;
 
 
   // Merge two JSON object
@@ -53,7 +54,7 @@
     this.remarkArrayToStatement = function(array) {
       //console.log(array);
       if (!Array.isArray(array)) {
-        console.log("remarkArrayToStatement did not receive an array");
+        console.warn("remarkArrayToStatement did not receive an array");
         return false;
       }
       if (array.length > 3) {
@@ -66,6 +67,39 @@
       var verb = avo[1].slice(1).slice(0,-1);
       var object = avo[2].slice(1).slice(0,-1);
 
+      // Begin statement structure
+      var stmt = {
+        'actor': { },
+        'verb': {
+          'display': {
+            'en-US': verb
+          },
+          'id': ''
+        },
+        'object': { }
+      };
+
+      // Handle different types of Actors (Agent)
+      if (actor.match(re_email)) {
+        stmt.actor = {
+          'mbox': 'mailto:' + actor,
+          'objectType': "Agent"
+        };
+      } else if (actor.match(re_sha1)) {
+        stmt.actor = {
+          'mbox_sha1sum': actor,
+          'objectType': "Agent"
+        };
+      } else if (actor.match(re_uri)) {
+        stmt.actor = {
+          'openid': actor,
+          'objectType': "Agent"
+        };
+      } else {
+        console.warn("No valid Actor string found");
+      };
+
+
       // Check if full URI or in ADL verb list
       if (verbs.indexOf(verb) != -1) {
         var verburi = 'http://adlnet.gov/expapi/verbs/' + verb;
@@ -76,20 +110,7 @@
         var verb = verburi.split(/\//).pop();
       }
 
-      // Begin statement structure
-      var stmt = {
-        'actor': {
-          'mbox': 'mailto:' + actor,
-          'objectType': 'Agent'
-        },
-        'verb': {
-          'display': {
-            'en-US': verb
-          },
-          'id': verburi
-        },
-        'object': { }
-      };
+      stmt.verb.id = verburi;
 
       // Check if email, full URI or needs to be made into a URI and add to stmt object
       if (object.match(re_email)) {

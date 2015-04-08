@@ -21,13 +21,13 @@ The first three parameter's are required by Statements and thus required by Rema
 
 #### Actor
 
-Currently only supports Agent property: mbox
+Currently only supports Agent:
 
-*string* an email address
+*string* an email address, an email sha1sum, an openid url
 
 #### Verb
 
-*string* either a word or a URI. Words will automatically resolve to a URI. If they are an ADL reserved word, they will use the http://adlnet.gov/expapi/verbs base URI
+*string* either a word or a URI. Words will automatically resolve to a URI. If they are an ADL reserved word, they will use the http://adlnet.gov/expapi/verbs/ base URI, otherwise http://example.com/verbs/ is the base URI.
 
 #### Object
 
@@ -65,6 +65,9 @@ Extensions are outside the scope of this tool
 ### Examples
 
 ```
+<tyler@example.com> <passed> <assessment1>
+<5a7a72c5ec7d3a7291b9b6101ae26101eb925099> <passed> <assessment1>
+<http://tyler.openid.example.com> <passed> <assessment1>
 <tyler@example.com> <passed> <assessment1> ( s: [2, 0, 3], d: "PT2M" ) { p: ["page 5"], g: ["chapter 1", "science 101", "science"] }
 <tyler@example.com> <read> <assessment1> ( s: [2, 0, 3], d: "PT2M" ) { p: ["page 5"], g: ["chapter 1", "science 101", "science"] }
 <tyler@example.com> <http://coolsite.com/verbs/read> <assessment1> ( s: [2, 0, 3], d: "PT2M") ) { p: ["page 5"], g: ["chapter 1", "science 101", "science"] }
