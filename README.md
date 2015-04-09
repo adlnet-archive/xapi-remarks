@@ -27,7 +27,7 @@ Currently only supports Agent:
 
 #### Verb
 
-*string* either a word or a URI. Words will automatically resolve to a URI. If they are an ADL reserved word, they will use the http://adlnet.gov/expapi/verbs/ base URI, otherwise http://example.com/verbs/ is the base URI.
+*string* either a word or a URI. Words will automatically resolve to a URI. If they are an ADL reserved word, they will use the http://adlnet.gov/expapi/verbs/ base URI, otherwise http://example.com/verbs/ is the base URI. The "display" property of the verb can be defined with a " | " delimiter, e.g. <passed | has passed>. The spaces are required.
 
 #### Object
 
@@ -67,6 +67,7 @@ Extensions are outside the scope of this tool
 ```
 <tyler@example.com> <passed> <assessment1>
 <tyler@example.com | Tyler Mulligan> <passed> <assessment1>
+<tyler@example.com> <passed | has passed> <assessment1>
 <5a7a72c5ec7d3a7291b9b6101ae26101eb925099> <passed> <assessment1>
 <http://tyler.openid.example.com> <passed> <assessment1>
 <tyler@example.com> <passed> <assessment1> ( s: [2, 0, 3], d: "PT2M" ) { p: ["page 5"], g: ["chapter 1", "science 101", "science"] }

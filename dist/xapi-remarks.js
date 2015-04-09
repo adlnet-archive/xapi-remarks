@@ -79,6 +79,9 @@
         'object': {}
       };
 
+      /*
+       * Actor
+       */
       var p_actor_arr = p_actor.split(" | ");
       var actor = p_actor_arr[0];
       var actor_name = p_actor_arr[1];
@@ -105,20 +108,31 @@
       
       if (actor_name != undefined) { stmt.actor.name = actor_name; }
 
+      /*
+       * Verb
+       */
+      var p_verb_arr = p_verb.split(" | ");
+      var verb = p_verb_arr[0];
+      var verb_display = p_verb_arr[1];
+
       // Check if full URI or in ADL verb list
-      if (verbs.indexOf(p_verb) != -1) {
-        var verburi = 'http://adlnet.gov/expapi/verbs/' + p_verb;
-        var verb = p_verb;
+      if (verbs.indexOf(verb) != -1) {
+        var verburi = 'http://adlnet.gov/expapi/verbs/' + encodeURIComponent(verb);
+        if (verb_display == undefined) { verb_display = verb; }
       } else if (p_verb.match(re_uri) == null) {
-        var verburi = baseuri + 'verbs/' + p_verb;
-        var verb = p_verb;
+        var verburi = baseuri + 'verbs/' + encodeURIComponent(verb);
+        if (verb_display == undefined) { verb_display = verb; }
       } else {
-        var verburi = p_verb;
-        var verb = verburi.split(/\//).pop();
+        var verburi = verb;
+        if (verb_display == undefined) { verb_display = verburi.split(/\//).pop(); } 
       }
 
       stmt.verb.id = verburi;
-      stmt.verb.display['en-US'] = verb;
+      stmt.verb.display['en-US'] = verb_display;
+
+      /*
+       * Object
+       */
 
       // Check if email, full URI or needs to be made into a URI and add to stmt object
       if (p_object.match(re_email)) {
@@ -183,8 +197,6 @@
                   default:
                 }
               }
-
-
             break;
             // context
             case "{":
