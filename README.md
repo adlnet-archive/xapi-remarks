@@ -23,34 +23,34 @@ The first three parameter's are required by Statements and thus required by Rema
 
 Currently only supports Agent:
 
-*string* an email address, an email sha1sum, an openid url. The "name" property of the actor can be defined with a " | " delimiter, e.g. <tyler@example.com | Tyler Mulligan>. The spaces are required.
+***string*** an email address, an email sha1sum, an openid url. The "name" property of the actor can be defined with a " | " delimiter, e.g. `<tyler@example.com | Tyler Mulligan>`. The spaces are required.
 
 #### Verb
 
-*string* either a word or a URI. Words will automatically resolve to a URI. If they are an ADL reserved word, they will use the http://adlnet.gov/expapi/verbs/ base URI, otherwise http://example.com/verbs/ is the base URI. The "display" property of the verb can be defined with a " | " delimiter, e.g. <passed | has passed>. The spaces are required.
+***string*** either a word or a URI. Words will automatically resolve to a URI. If they are an ADL reserved word, they will use the http://adlnet.gov/expapi/verbs/ base URI, otherwise http://example.com/verbs/ is the base URI. The "display" property of the verb can be defined with a " | " delimiter, e.g. `<passed | has passed>`. The spaces are required.
 
 #### Object
 
 Currently only supports objectType Activity, Agent and StatementRef
 
-*string* a URI of an Activity (Activity), an email address (Agent) or a UUID of a Statement (StatementRef)
+***string*** a URI of an Activity (Activity), an email address (Agent) or a UUID of a Statement (StatementRef)
 
 #### Result
 
 Currently accepts
 
-* s: *array* score - an array of scores [raw, min, max]
-* d: *string* duration - in the form of [ISO 8601 Durations](http://www.wikiwand.com/en/ISO_8601#/Durations), just like Statements.
-* r: *string* response
-* c: *boolean* completion
-* w: *boolean* success (win)
+* s: ***array*** score - an array of scores [raw, min, max]
+* d: ***string*** duration - in the form of [ISO 8601 Durations](http://www.wikiwand.com/en/ISO_8601#/Durations), just like Statements.
+* r: ***string*** response
+* c: ***boolean*** completion
+* w: ***boolean*** success (win)
 
 #### Context
 
 Currently only supports Context Activites
 
-* p: *array* parent - an array of strings, either words or URIs
-* g: *array* grouping - an array of strings, either words or URIs
+* p: ***array*** parent - an array of strings, either words or URIs
+* g: ***array*** grouping - an array of strings, either words or URIs
 
 #### Attachments
 
