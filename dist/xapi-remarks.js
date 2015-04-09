@@ -69,14 +69,14 @@
 
       // Begin statement structure
       var stmt = {
-        'actor': { },
+        'actor': {},
         'verb': {
           'display': {
-            'en-US': verb
+            'en-US': ''
           },
           'id': ''
         },
-        'object': { }
+        'object': {}
       };
 
       // Handle different types of Actors (Agent)
@@ -111,6 +111,7 @@
       }
 
       stmt.verb.id = verburi;
+      stmt.verb.display['en-US'] = verb;
 
       // Check if email, full URI or needs to be made into a URI and add to stmt object
       if (object.match(re_email)) {
