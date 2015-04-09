@@ -23,7 +23,7 @@ The first three parameter's are required by Statements and thus required by Rema
 
 Currently only supports Agent:
 
-*string* an email address, an email sha1sum, an openid url
+*string* an email address, an email sha1sum, an openid url. The "name" property of the actor can be defined with a " | " delimiter, e.g. <tyler@example.com | Tyler Mulligan>. The spaces are required.
 
 #### Verb
 
@@ -66,6 +66,7 @@ Extensions are outside the scope of this tool
 
 ```
 <tyler@example.com> <passed> <assessment1>
+<tyler@example.com | Tyler Mulligan> <passed> <assessment1>
 <5a7a72c5ec7d3a7291b9b6101ae26101eb925099> <passed> <assessment1>
 <http://tyler.openid.example.com> <passed> <assessment1>
 <tyler@example.com> <passed> <assessment1> ( s: [2, 0, 3], d: "PT2M" ) { p: ["page 5"], g: ["chapter 1", "science 101", "science"] }

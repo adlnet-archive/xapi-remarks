@@ -63,9 +63,9 @@
       } else {
         var avo = array;
       }
-      var actor = avo[0].slice(1).slice(0,-1);
-      var verb = avo[1].slice(1).slice(0,-1);
-      var object = avo[2].slice(1).slice(0,-1);
+      var p_actor = avo[0].slice(1).slice(0,-1);
+      var p_verb = avo[1].slice(1).slice(0,-1);
+      var p_object = avo[2].slice(1).slice(0,-1);
 
       // Begin statement structure
       var stmt = {
@@ -78,6 +78,10 @@
         },
         'object': {}
       };
+
+      var p_actor_arr = p_actor.split(" | ");
+      var actor = p_actor_arr[0];
+      var actor_name = p_actor_arr[1];
 
       // Handle different types of Actors (Agent)
       if (actor.match(re_email)) {
@@ -98,15 +102,18 @@
       } else {
         console.warn("No valid Actor string found");
       };
-
+      
+      if (actor_name != undefined) { stmt.actor.name = actor_name; }
 
       // Check if full URI or in ADL verb list
-      if (verbs.indexOf(verb) != -1) {
-        var verburi = 'http://adlnet.gov/expapi/verbs/' + verb;
-      } else if (verb.match(re_uri) == null) {
-        var verburi = baseuri + 'verbs/' + verb;
+      if (verbs.indexOf(p_verb) != -1) {
+        var verburi = 'http://adlnet.gov/expapi/verbs/' + p_verb;
+        var verb = p_verb;
+      } else if (p_verb.match(re_uri) == null) {
+        var verburi = baseuri + 'verbs/' + p_verb;
+        var verb = p_verb;
       } else {
-        var verburi = verb;
+        var verburi = p_verb;
         var verb = verburi.split(/\//).pop();
       }
 
@@ -114,24 +121,24 @@
       stmt.verb.display['en-US'] = verb;
 
       // Check if email, full URI or needs to be made into a URI and add to stmt object
-      if (object.match(re_email)) {
+      if (p_object.match(re_email)) {
         stmt.object = {
-          'mbox': 'mailto:' + object,
+          'mbox': 'mailto:' + p_object,
           'objectType': "Agent"
         };
-      } else if (object.match(re_uuid)) {
+      } else if (p_object.match(re_uuid)) {
         stmt.object = {
-          'id': object,
+          'id': p_object,
           'objectType': "StatementRef"
         };
-      } else if (object.match(re_uri)) {
+      } else if (p_object.match(re_uri)) {
         stmt.object = {
-          'id': object,
+          'id': p_object,
           'objectType': "Activity"
         };
       } else {
         stmt.object = {
-          'id': baseuri + 'activities/' + encodeURI(object),
+          'id': baseuri + 'activities/' + encodeURI(p_object),
           'objectType': "Activity"
         };
       }
