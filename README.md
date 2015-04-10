@@ -5,6 +5,18 @@ The syntax is very strict but flexible enough to convey ideas about how to form 
 
 The parser will allow you to convert xAPI Remarks to xAPI Statements. This is helpful for rapidly generating statements that you can send to an LRS to advise you on reporting (especially if you're using xAPI Canteen).
 
+### About this Repository
+
+- `src/*` includes the source files for xapi-remarks
+- `dist/xapi-remarks.min.js` is this distributed remarks file for use in your project
+- `examples/*` show additional examples for usage
+- `lib/*` includes libraries used by examples
+- `media/*` includes media used by examples
+
+#### Building
+
+To build, you must have grunt installed `npm install -g grunt`. Use `npm install` to install all dependencies for building. Run the default grunt task with `grunt` to build the dist js.
+
 ### Valid Syntax
 ```
 <Actor> <Verb> <Object> (result) {context} [attachments]
