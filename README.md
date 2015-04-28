@@ -51,18 +51,18 @@ Currently only supports objectType Activity, Agent and StatementRef
 
 Currently accepts
 
-* s: ***array*** score - an array of scores [raw, min, max]
-* d: ***string*** duration - in the form of [ISO 8601 Durations](http://www.wikiwand.com/en/ISO_8601#/Durations), just like Statements.
-* r: ***string*** response
-* c: ***boolean*** completion
-* w: ***boolean*** success (win)
+* score: ***array*** score - an array of scores [raw, min, max]
+* duration: ***string*** duration - in the form of [ISO 8601 Durations](http://www.wikiwand.com/en/ISO_8601#/Durations), just like Statements.
+* response: ***string*** response
+* completion: ***boolean*** completion
+* success: ***boolean*** success
 
 #### Context
 
 Currently only supports Context Activites
 
-* p: ***array*** parent - an array of strings, either words or URIs
-* g: ***array*** grouping - an array of strings, either words or URIs
+* parent: ***array*** parent - an array of strings, either words or URIs
+* grouping: ***array*** grouping - an array of strings, either words or URIs
 
 #### Attachments
 
@@ -82,10 +82,11 @@ Extensions are outside the scope of this tool
 <tyler@example.com> <passed | has passed> <assessment1>
 <5a7a72c5ec7d3a7291b9b6101ae26101eb925099> <passed> <assessment1>
 <http://tyler.openid.example.com> <passed> <assessment1>
-<tyler@example.com> <passed> <assessment1> ( s: [2, 0, 3], d: "PT2M" ) { p: ["page 5"], g: ["chapter 1", "science 101", "science"] }
-<tyler@example.com> <read> <assessment1> ( s: [2, 0, 3], d: "PT2M" ) { p: ["page 5"], g: ["chapter 1", "science 101", "science"] }
-<tyler@example.com> <http://coolsite.com/verbs/read> <assessment1> ( s: [2, 0, 3], d: "PT2M") ) { p: ["page 5"], g: ["chapter 1", "science 101", "science"] }
-<tyler@example.com> <passed> <assessment1> ( s: [2, 0, 3], d: "PT2M" ) { p: ["page 5"], g: ["chapter 1", "http://coolsite.com/acitivites/science_101", "science"] }
+<tyler@example.com> <progressed> <http://adlnet.github.io>
+<tyler@example.com> <added> <http://adlnet.github.io>
+<tyler@example.com> <passed> <assessment1> ( score: [2, 0, 3], duration: "PT2M" ) { parent: ["page 5"], grouping: ["chapter 1", "science 101", "science"] }
+<tyler@example.com> <passed> <assessment1> ( score: [2, 0, 3], duration: "PT2M", response: "hello", completion: true, success: false ) { parent: ["page 5"], grouping: ["chapter 1", "science 101", "science"] }
+<tyler@example.com> <voided> <137ca18f-97f6-4477-981a-696fb41c6b63>
 ```
 
 This project is still a work in progress, as such, syntax may (will) change.

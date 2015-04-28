@@ -8,8 +8,8 @@ var remarks = [
   '<Actor> <Verb> <Object> (result) [attachments]',
   '<Actor> <Verb> <Object> [attachments]',
   '<Actor> <Verb> <Object> {context}',
-  '<tyler@example.com> <passed> <assessment1> ( s: [2, 0, 3], d: "PT2M" )',
-  '<tyler@example.com> <passed> <assessment1> ( s: [2, 0, 3], d: "PT2M", r: "hello", c: true, w: false ) { p: ["page 5"], g: ["chapter 1", "science 101", "science"] }',
+  '<tyler@example.com> <passed> <assessment1> ( score: [2, 0, 3], duration: "PT2M" )',
+  '<tyler@example.com> <passed> <assessment1> ( score: [2, 0, 3], duration: "PT2M", response: "hello", completion: true, success: false ) { parent: ["page 5"], grouping: ["chapter 1", "science 101", "science"] }',
   //'<tyler@example.com> <passed> < dsaasghasdfasdfas',
   //'<tyler@example.com> <3@)$@ _@#_!!dsaasghasdfasdfas'
 ];

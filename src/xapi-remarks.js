@@ -166,11 +166,12 @@
             // result
             case "(":
               // turn it into JSON
-              obj = JSON.parse(o.replace(/\(/g,"{").replace(/\)/g,"}").replace(/([sdrwc]{1}): (\[|"|true|false)/g,'"$1": $2').trim());
+              obj = JSON.parse(o.replace(/\(/g,"{").replace(/\)/g,"}").replace(/([sdrwc]{1}|score|duration|response|completion|success): (\[|"|true|false)/g,'"$1": $2').trim());
               stmt_ex = { 'result': {} };
               for(var key in obj) {
                 switch (key) {
                   case 's':
+                  case 'score':
                     var s = obj[key];
                     stmt_ex.result.score = {
                       'raw': s[0],
@@ -178,18 +179,22 @@
                       'max': s[2]
                     };
                   break;
+                  case 'success':
                   case 'w': // success / win (s taken for score)
                     var w = obj[key];
                     stmt_ex.result.success = w;
                   break;
+                  case 'completion':
                   case 'c':
                     var c = obj[key];
                     stmt_ex.result.completion = c;
                   break;
+                  case 'response':
                   case 'r':
                     var r = obj[key];
                     stmt_ex.result.response = r;
                   break;
+                  case 'duration':
                   case 'd':
                     var d = obj[key];
                     stmt_ex.result.duration = d;
@@ -200,10 +205,11 @@
             break;
             // context
             case "{":
-              obj = JSON.parse(o.replace(/\(/g,"{").replace(/\)/g,"}").replace(/([pg]{1}): (\[|")/g,'"$1": $2').trim());
+              obj = JSON.parse(o.replace(/\(/g,"{").replace(/\)/g,"}").replace(/([pg]{1}|parent|grouping): (\[|")/g,'"$1": $2').trim());
               stmt_ex = { 'context': { 'contextActivities' : {} } };
               for(var key in obj) {
                 switch (key) {
+                  case 'parent':
                   case 'p':
                     var ps = obj[key];
                     var parent_arr = [];
@@ -228,6 +234,7 @@
                     });
                     stmt_ex.context.contextActivities['parent'] = parent_arr;
                   break;
+                  case 'grouping':
                   case 'g':
                     var gs = obj[key];
                     var grouping_arr = [];
