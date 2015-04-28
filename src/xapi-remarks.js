@@ -18,6 +18,31 @@
     for(var key in obj2) result[key]=obj2[key];
     return result;
   }
+  
+  // Generate a JSON object for a Context Activity value
+  function buildContextActivity(obj) {
+    var arr = [];
+    obj.forEach(function(o) {
+      
+      if (o.match(re_uri) == null) {
+        ouri = baseuri + 'activities/' + encodeURI(o);
+      } else {
+        ouri = o;
+        o = ouri.split(/\//).pop();
+      }
+
+      arr.push({
+       "definition": {
+            "name": {
+                "en-US": o
+            }
+        },
+        'id': ouri,
+        'objectType': 'Activity'
+      });
+    });
+    return arr;
+  }
 
   XAPIRemarks = function() {
     
@@ -205,59 +230,25 @@
             break;
             // context
             case "{":
-              obj = JSON.parse(o.replace(/\(/g,"{").replace(/\)/g,"}").replace(/([pg]{1}|parent|grouping): (\[|")/g,'"$1": $2').trim());
+              obj = JSON.parse(o.replace(/\(/g,"{").replace(/\)/g,"}").replace(/([pgco]{1}|parent|grouping|category|other): (\[|")/g,'"$1": $2').trim());
               stmt_ex = { 'context': { 'contextActivities' : {} } };
               for(var key in obj) {
                 switch (key) {
                   case 'parent':
                   case 'p':
-                    var ps = obj[key];
-                    var parent_arr = [];
-                    ps.forEach(function(p) {
-                      
-                      if (p.match(re_uri) == null) {
-                        puri = baseuri + 'activities/' + encodeURI(p);
-                      } else {
-                        puri = p;
-                        p = puri.split(/\//).pop();
-                      }
-
-                      parent_arr.push({
-                       "definition": {
-                            "name": {
-                                "en-US": p
-                            }
-                        },
-                        'id': puri,
-                        'objectType': 'Activity'
-                      });
-                    });
-                    stmt_ex.context.contextActivities['parent'] = parent_arr;
+                    stmt_ex.context.contextActivities['parent'] = buildContextActivity(obj[key]);
                   break;
                   case 'grouping':
                   case 'g':
-                    var gs = obj[key];
-                    var grouping_arr = [];
-                    gs.forEach(function(g) {
-                      
-                      if (g.match(re_uri) == null) {
-                        guri = baseuri + 'activities/' + encodeURI(g);
-                      } else {
-                        guri = g;
-                        g = puri.split(/\//).pop();
-                      }
-
-                      grouping_arr.push({
-                       "definition": {
-                            "name": {
-                                "en-US": g
-                            }
-                        },
-                        'id': guri,
-                        'objectType': 'Activity'
-                      });
-                    });
-                    stmt_ex.context.contextActivities['grouping'] = grouping_arr;
+                    stmt_ex.context.contextActivities['grouping'] = buildContextActivity(obj[key]);
+                  break;
+                  case 'category':
+                  case 'c':
+                    stmt_ex.context.contextActivities['category'] = buildContextActivity(obj[key]);
+                  break;
+                  case 'other':
+                  case 'o':
+                    stmt_ex.context.contextActivities['other'] = buildContextActivity(obj[key]);
                   break;
                   default:
                 }

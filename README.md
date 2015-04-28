@@ -63,6 +63,8 @@ Currently only supports Context Activites
 
 * parent: ***array*** parent - an array of strings, either words or URIs
 * grouping: ***array*** grouping - an array of strings, either words or URIs
+* category: ***array*** category - an array of strings, either words or URIs
+* other: ***array*** other - an array of strings, either words or URIs
 
 #### Attachments
 
@@ -86,6 +88,7 @@ Extensions are outside the scope of this tool
 <tyler@example.com> <added> <http://adlnet.github.io>
 <tyler@example.com> <passed> <assessment1> ( score: [2, 0, 3], duration: "PT2M" ) { parent: ["page 5"], grouping: ["chapter 1", "science 101", "science"] }
 <tyler@example.com> <passed> <assessment1> ( score: [2, 0, 3], duration: "PT2M", response: "hello", completion: true, success: false ) { parent: ["page 5"], grouping: ["chapter 1", "science 101", "science"] }
+<tyler@example.com> <passed> <assessment1> ( score: [2, 0, 3], duration: "PT2M", response: "hello", completion: true, success: false ) { parent: ["page 5"], grouping: ["chapter 1", "science 101", "science"], category: ["http://example.com/profiles/ebook"], other: ["test"] }
 <tyler@example.com> <voided> <137ca18f-97f6-4477-981a-696fb41c6b63>
 ```
 
